@@ -1,320 +1,105 @@
 {% extends "base.html" %}
-
 {% block title %}
 Appointments | Medi-API
 {% endblock %}
-
 {% block content %}
-
 <div class="d-flex justify-content-between align-items-center mb-4">
-
     <div>
-
-        <h2 class="fw-bold mb-1">
-            Appointments
-        </h2>
-
-        <p class="text-muted mb-0">
-            Manage patient appointments
-        </p>
-
+        <h2 class="fw-bold mb-1">Appointments</h2>
+        <p class="text-muted mb-0">Manage patient appointments</p>
     </div>
-
-
-    <button
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#appointmentModal">
-
-        <i class="bi bi-calendar-plus me-2"></i>
-
-        New Appointment
-
-    </button>
-
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal"><i class="bi bi-calendar-plus me-2"></i>New Appointment</button>
 </div>
-
-
-<div id="appointmentsAlert"
-     class="alert d-none">
+<div id="appointmentsAlert" class="alert d-none">
 </div>
-
-
 <div class="table-card">
-
     <div class="card-body p-0">
-
-
         <div class="p-4 border-bottom">
-
             <div class="row align-items-center g-3">
-
                 <div class="col-md-6">
-
-                    <h5 class="fw-bold mb-1">
-                        Appointment Schedule
-                    </h5>
-
-                    <p class="text-muted small mb-0">
-                        Manage scheduled appointments
-                    </p>
-
+                    <h5 class="fw-bold mb-1">Appointment Schedule</h5>
+                    <p class="text-muted small mb-0">Manage scheduled appointments</p>
                 </div>
-
-
                 <div class="col-md-6">
-
-                    <select
-                        id="appointmentStatusFilter"
-                        class="form-select">
-
-                        <option value="">
-                            All statuses
-                        </option>
-
-                        <option value="scheduled">
-                            Scheduled
-                        </option>
-
-                        <option value="completed">
-                            Completed
-                        </option>
-
-                        <option value="cancelled">
-                            Cancelled
-                        </option>
-
+                    <select id="appointmentStatusFilter" class="form-select">
+                        <option value="">All statuses</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
-
                 </div>
-
             </div>
-
         </div>
-
-
         <div class="table-responsive">
-
             <table class="table mb-0">
-
                 <thead>
-
                     <tr>
-
                         <th>ID</th>
-
                         <th>Patient</th>
-
                         <th>Doctor</th>
-
                         <th>Date</th>
-
                         <th>Time</th>
-
                         <th>Status</th>
-
                         <th>Actions</th>
-
                     </tr>
-
                 </thead>
-
-
                 <tbody id="appointmentsTableBody">
-
                     <tr>
-
-                        <td colspan="7"
-                            class="text-center py-5">
-
+                        <td colspan="7" class="text-center py-5">
                             <div class="spinner-border text-primary">
                             </div>
-
-                            <p class="text-muted small mt-2 mb-0">
-                                Loading appointments...
-                            </p>
-
+                            <p class="text-muted small mt-2 mb-0">Loading appointments...</p>
                         </td>
-
                     </tr>
-
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 </div>
-
-
 <!-- APPOINTMENT MODAL -->
-
-<div
-    class="modal fade"
-    id="appointmentModal"
-    tabindex="-1"
-    aria-hidden="true">
-
+<div class="modal fade" id="appointmentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content border-0 shadow">
-
             <div class="modal-header">
-
                 <h5 class="modal-title fw-bold">
                     New Appointment
                 </h5>
-
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
-
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-
-
             <form id="appointmentForm">
-
                 <div class="modal-body">
-
                     <div
-                        id="appointmentFormAlert"
-                        class="alert d-none">
+                        id="appointmentFormAlert" class="alert d-none">
                     </div>
-
-
                     <div class="mb-3">
-
-                        <label
-                            for="appointmentPatient"
-                            class="form-label">
-
+                        <label for="appointmentPatient" class="form-label">
                             Patient ID
-
                         </label>
-
-                        <input
-                            type="number"
-                            id="appointmentPatient"
-                            class="form-control"
-                            required>
-
-                    </div>
-
-
+                        <input type="number" id="appointmentPatient" class="form-control" required></div>
                     <div class="mb-3">
-
-                        <label
-                            for="doctorName"
-                            class="form-label">
-
+                        <label for="doctorName" class="form-label">
                             Doctor name
-
                         </label>
-
-                        <input
-                            type="text"
-                            id="doctorName"
-                            class="form-control"
-                            required>
-
-                    </div>
-
-
+                        <input type="text" id="doctorName" class="form-control" required></div>
                     <div class="row g-3">
-
                         <div class="col-md-6">
-
-                            <label
-                                for="appointmentDate"
-                                class="form-label">
-
-                                Date
-
-                            </label>
-
-                            <input
-                                type="date"
-                                id="appointmentDate"
-                                class="form-control"
-                                required>
-
-                        </div>
-
-
+                            <label for="appointmentDate" class="form-label">Date</label>
+                            <input type="date" id="appointmentDate" class="form-control" required></div>
                         <div class="col-md-6">
-
-                            <label
-                                for="appointmentTime"
-                                class="form-label">
-
-                                Time
-
-                            </label>
-
-                            <input
-                                type="time"
-                                id="appointmentTime"
-                                class="form-control"
-                                required>
-
-                        </div>
-
+                            <label for="appointmentTime" class="form-label">Time</label>
+                            <input type="time" id="appointmentTime" class="form-control" required></div>
                     </div>
-
-
                     <div class="mt-3">
-
-                        <label
-                            for="appointmentNotes"
-                            class="form-label">
-
-                            Notes
-
-                        </label>
-
-                        <textarea
-                            id="appointmentNotes"
-                            class="form-control"
-                            rows="3">
-                        </textarea>
-
+                        <label for="appointmentNotes" class="form-label">Notes</label>
+                        <textarea id="appointmentNotes" class="form-control" rows="3"></textarea>
                     </div>
-
                 </div>
-
-
                 <div class="modal-footer">
-
-                    <button
-                        type="button"
-                        class="btn btn-light"
-                        data-bs-dismiss="modal">
-
-                        Cancel
-
-                    </button>
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="saveAppointmentButton">
-
-                        Create Appointment
-
-                    </button>
-
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveAppointmentButton">Create Appointment</button>
                 </div>
-
             </form>
-
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}
